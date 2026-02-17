@@ -1,0 +1,93 @@
+# Environment variables and secrets
+.env
+
+# Terraform
+.terraform/
+terraform.tfstate
+
+# Coverage
+coverage/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs and editors
+.DS_STORE
+.vscode
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Checksums
+*.sha256
+
+# Data files - common formats
+*.csv
+*.xlsx
+*.xlsm
+*.xls
+*.parquet
+*.feather
+*.hdf5
+*.h5
+*.pkl
+*.pickle
+*.db
+*.sqlite
+*.sqlite3
+*.dta
+*.sav
+*.rds
+*.rda
+*.RData
+
+# Documents (often contain sensitive information)
+*.doc
+*.docx
+*.pdf
+
+# Data directories (except .gitkeep files and READMEs)
+data/**/* # Ignore all files in data directory recursively
+!data/**/*.gitkeep # But keep all .gitkeep files
+!data/**/README.md # And keep all README.md files
+
+# Models directory (except .gitkeep)
+models/*
+!models/.gitkeep
+
+# Reports directory (except .gitkeep)
+reports/*
+!reports/.gitkeep
+!reports/figures/
+reports/figures/*
+!reports/figures/.gitkeep
