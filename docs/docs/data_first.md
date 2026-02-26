@@ -331,6 +331,186 @@ on criminal histories.
 In future, data will be made available on offender assessments and from other government 
 departments subject to agreements.ffence types.
 
+## OASys metadata: variables and tables for key outcomes
+
+**Source:** `OASys_ONS_data_catalogue_NOV25_External.ods`  
+**Where in the metadata:** `OASys_ONS_data_catalogue_NOV25_External.ods` → **`data_dictionary`** tab  
+**Key columns to use:** **Table Name**, **Variable Name**, **Variable Description**, **Values (optional)**
+
+---
+
+## 1) Family instability
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_sara`** — Spousal Assault Risk Assessment (domestic abuse / intimate partner violence risk)  
+- **`oasys_assessments_details_core_risk`** — Core OASys questions (relationships/family domain is typically a “section” with `question_<section>_<q>` naming)
+
+### Confirmed variables in the catalogue (SARA table)
+| Table | Variable | What it captures (from the metadata description) |
+|---|---|---|
+| `oasys_assessments_details_sara` | `question_sr45_1_1` | Rating associated with offender’s past spousal physical violence (ordinal scale) |
+| `oasys_assessments_details_sara` | `question_sr45_1_2` | Whether offender’s past spousal physical violence is present (Yes/No) |
+| `oasys_assessments_details_sara` | `question_sr89_1` | Questionnaire/psychological assessment item (contextual SARA item) |
+| `oasys_assessments_details_sara` | `question_sr93_1` | Questionnaire/psychological assessment item (contextual SARA item) |
+
+### How to find the rest (recommended filters)
+In the same `data_dictionary` sheet:
+- Filter **Table Name = `oasys_assessments_details_sara`**
+- Filter **Variable Name contains `question_sr`**  
+  → returns the full set of SARA questions related to domestic abuse / relationship risk.
+
+For family/relationships inside the core assessment:
+- Filter **Table Name = `oasys_assessments_details_core_risk`**
+- Search **Variable Description** for:  
+  `relationship`, `partner`, `marital`, `family`, `children`, `domestic`, `violence`, `abuse`, `separation`
+
+---
+
+## 2) Poor early years and education
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_skillschecker`** — skills/learning assessment (education and skills proxies)  
+- **`oasys_assessments_details_core_risk`** — education/training/employment section lives here (use section-pattern search)  
+- **`oasys_assessments_details_saq`** (optional) — self-assessment questionnaire may include relevant self-report items (depends on variable set)
+
+### Confirmed variables in the catalogue (childhood-related flags)
+These sit in the emotional wellbeing section but contain childhood/early-life indicators often used as “early years” proxies in adult datasets:
+
+| Table | Variable | What it captures (from the metadata description) |
+|---|---|---|
+| `oasys_assessments_details_core_risk` | `question_10_7_childhood` | Evidence of childhood-related factor (binary flag) |
+| `oasys_assessments_details_core_risk` | `question_10_7_v2_childhood` | Same as above (v2 version, Yes/No) |
+
+### How to find the education variables (recommended filters)
+Because the exact variable names vary by section, use these precise catalogue searches:
+
+1) **Skillschecker table (best starting point)**
+- Filter **Table Name = `oasys_assessments_details_skillschecker`**
+- Search **Variable Description** for:
+  `literacy`, `numeracy`, `reading`, `writing`, `qualification`, `education`, `school`, `learning`, `skills`, `training`
+
+2) **Core risk education/ETE section**
+- Filter **Table Name = `oasys_assessments_details_core_risk`**
+- Search **Variable Description** for:
+  `education`, `training`, `employment`, `basic skills`, `school`, `learning difficulty`, `qualification`
+
+> Practical note: OASys core questions use `question_<section>_<number>` naming.  
+> Education/ETE commonly sits in a dedicated section (you’ll see a cluster of `question_<same section>_*` where the descriptions mention education/training/employment).
+
+---
+
+## 3) Poor physical health
+
+### Primary OASys tables to use
+- **`oasys_assessments_metadata`** — high-level healthcare requirement indicator  
+- **`oasys_assessments_details_bcs`** — basic custody screening health flags  
+- **`oasys_assessments_details_tr_bcs`** — transfer/basic custody screening health flags  
+- **`oasys_assessments_details_core_risk`** — chronic health problems + head injury flags  
+
+### Confirmed physical-health-related variables
+| Table | Variable | What it captures (from the metadata description) |
+|---|---|---|
+| `oasys_assessments_metadata` | `level_healthcare_req_elm` | Offender’s level of healthcare required (categorical) |
+| `oasys_assessments_details_bcs` | `question_bcs78` | Whether there are any health concerns (Yes/No) |
+| `oasys_assessments_details_bcs` | `question_bcs80` | Whether offender has been seen by health care (Yes/No) |
+| `oasys_assessments_details_bcs` | `question_bcs91` | Whether Health and Well-being is an issue (Yes/No) |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs801` | Whether health care screening has been completed (DK/No/Yes) |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs807` | Whether there are care/health concerns (Yes/No) |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs91` | Whether health and well-being is an issue (Yes/No) |
+| `oasys_assessments_details_core_risk` | `question_13_3_1_1` | Chronic health problem flag (binary) |
+| `oasys_assessments_details_core_risk` | `question_13_3_1_2` | Chronic health problem flag (binary) |
+| `oasys_assessments_details_core_risk` | `question_13_3_1_3` | Chronic health problem flag (binary) |
+| `oasys_assessments_details_core_risk` | `question_10_7_histheadinj` | History of serious head injury (binary flag) |
+
+### How to find more physical health variables
+In `data_dictionary`:
+- Search **Variable Description** for:
+  `health`, `disability`, `chronic`, `medical`, `hospital`, `head injury`, `mobility`
+
+---
+
+## 4) Poor mental health
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_core_risk`** — emotional wellbeing / psychiatric problems / self-harm indicators  
+- **`oasys_assessments_details_bcs`** and **`oasys_assessments_details_tr_bcs`** — high-level health/wellbeing screening flags  
+- **`oasys_assessments_details_rmp`** — includes an indicator tied to conditional discharge status (often relevant to mental health pathways)
+
+### Confirmed mental-health-related variables (core risk)
+| Table | Variable | What it captures (from the metadata description) | Values (as per catalogue) |
+|---|---|---|---|
+| `oasys_assessments_details_core_risk` | `question_10_5` | Self-harm / attempted suicide / suicidal thoughts or feelings | `NO` (0) / `YES` (2) |
+| `oasys_assessments_details_core_risk` | `question_10_6` | Current psychiatric problems | `0` none / `1` some / `2` significant |
+| `oasys_assessments_details_core_risk` | `question_10_7_histpsych` | Psychiatric history flag | Yes/No (or `YES` depending on version) |
+| `oasys_assessments_details_core_risk` | `question_10_7_psychtreat` | Currently receiving psychiatric treatment | Yes/No |
+| `oasys_assessments_details_core_risk` | `question_10_7_medication` | Ever been on medication (context: psych/health) | Yes/No |
+| `oasys_assessments_details_core_risk` | `question_10_7_patient` | Ever been a patient (context: psych/health) | Yes/No |
+| `oasys_assessments_details_core_risk` | `question_10_7_v2_histpsych` | v2 psychiatric history | Yes/No |
+| `oasys_assessments_details_core_risk` | `question_10_7_v2_psychtreat` | v2 current psych treatment | Yes/No |
+| `oasys_assessments_details_core_risk` | `question_10_7_v2_medication` | v2 medication | Yes/No |
+| `oasys_assessments_details_core_risk` | `question_10_7_v2_patient` | v2 patient | Yes/No |
+
+### Confirmed mental-health-adjacent variable (RMP)
+| Table | Variable | What it captures (from the metadata description) |
+|---|---|---|
+| `oasys_assessments_details_rmp` | `question_rmp_15` | Indicator for “conditionally discharged…” (as described in catalogue) |
+
+### How to find all mental health variables (recommended filters)
+In `data_dictionary`:
+- Filter **Table Name = `oasys_assessments_details_core_risk`**
+- Filter **Variable Name contains `question_10_`**  
+  → returns the full emotional wellbeing section.
+
+Also search **Variable Description** for:
+`mental`, `psychiatric`, `psychological`, `self-harm`, `suicide`, `depression`, `anxiety`, `treatment`, `medication`
+
+---
+
+## Quick way to extract the full lists yourself (copy/paste)
+
+```python
+import pandas as pd
+
+df = pd.read_excel(
+    "OASys_ONS_data_catalogue_NOV25_External.ods",
+    sheet_name="data_dictionary",
+    engine="odf"
+)
+
+def find_by_keywords(keywords, table=None):
+    x = df
+    if table:
+        x = x[x["Table Name"] == table]
+    pat = "|".join([k.replace(" ", r"\s+") for k in keywords])
+    return x[x["Variable Description"].astype(str).str.contains(pat, case=False, na=False)][
+        ["Table Name","Variable Name","Variable Description","Values (optional)"]
+    ].sort_values(["Table Name","Variable Name"])
+
+# 1) Family instability
+family = find_by_keywords(
+    ["family","relationship","partner","marital","children","domestic","abuse","violence"]
+)
+
+# 2) Early years & education
+education = find_by_keywords(
+    ["education","school","training","qualification","literacy","numeracy","learning","skills"]
+)
+
+# 3) Physical health
+physical = find_by_keywords(
+    ["physical health","health","chronic","disability","medical","hospital","head injury"]
+)
+
+# 4) Mental health
+mental = find_by_keywords(
+    ["mental","psychiatric","psychological","self-harm","suicide","treatment","medication","depression","anxiety"]
+)
+
+print(family.head(20))
+print(education.head(20))
+print(physical.head(20))
+print(mental.head(20))
+
 ## Additional OASys metadata: variables and tables for outcomes 5–8
 
 **Source:** `OASys_ONS_data_catalogue_NOV25_External.ods`  
@@ -493,3 +673,4 @@ In `data_dictionary`:
 - Search **Variable Description** for: `offence`, `offending`, `conviction`, `breach`, `custodial`, `sanction`, `weapon`, `violence`, `victim`, `escalation`, `pattern`
 
 ---
+
