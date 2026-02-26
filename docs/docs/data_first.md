@@ -330,3 +330,166 @@ the National Pupil Database (NPD) linked to Police National Computer (PNC) data
 on criminal histories.
 In future, data will be made available on offender assessments and from other government 
 departments subject to agreements.ffence types.
+
+## Additional OASys metadata: variables and tables for outcomes 5–8
+
+**Source:** `OASys_ONS_data_catalogue_NOV25_External.ods`  
+**Where in the metadata:** `OASys_ONS_data_catalogue_NOV25_External.ods` → **`data_dictionary`** tab  
+**Key columns to use:** **Table Name**, **Variable Name**, **Variable Description**, **Values (optional)**  
+*(This section extends the earlier outcomes 1–4 mapping.)*
+
+---
+
+## 5) Housing insecurity (poverty / homelessness)
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_core_risk`** — Accommodation section (**Section 3**) is captured as `question_3_*`
+- **`oasys_assessments_details_bcs`** — Basic custody screening (accommodation before prison, housing benefit, accommodation problem flags)
+- **`oasys_assessments_details_tr_bcs`** — Transfer/basic custody screening (tenancy/rental issues + accommodation need flags)
+- **`oasys_assessments_details_rmp`** — Contains a field referencing accommodation considerations (useful as a supporting flag)
+
+### Confirmed variables in the catalogue (Accommodation)
+| Table | Variable | What it captures (from the metadata description) | Values (optional) |
+|---|---|---|---|
+| `oasys_assessments_details_bcs` | `question_bcs33` | Offender’s accommodation status before prison | Coded categories incl. permanent/temporary/rough sleeping (see catalogue) |
+| `oasys_assessments_details_bcs` | `question_bcs36` | Type of accommodation lived in before prison | Coded categories (council/HA/private/other; see catalogue) |
+| `oasys_assessments_details_bcs` | `question_bcs37` | Suitability of accommodation before prison | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs38` | Claiming housing benefit | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs39` | Has somewhere to live on release (description begins “Has the Offender got somewhere to live when th…”) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs43` | Accommodation is a problem issue | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_3_1_1` | Records details of type of accommodation | Coded categories (see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_3_1_2` | Accommodation status | `CURRENT = …` / `PLANNED = …` (see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_3_3` | No fixed abode flag (description begins “currently of no f…”) | `NO/YES` (plus `M = Missing`, see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_3_4` | Living in suitable accommodation | `0/1/2` scale (No/Some/Significant problems + `M`) |
+| `oasys_assessments_details_core_risk` | `question_3_5` | Permanence/stability issues (description begins “issues with perm…”) | `0/1/2` scale (+ `M`) |
+| `oasys_assessments_details_core_risk` | `question_3_6` | Suitability of accommodation location | `0/1/2` scale (+ `M`) |
+| `oasys_assessments_details_core_risk` | `question_3_98` | Accommodation issues linked to risk/needs (flag) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_3_99` | Accommodation issues linked to offending behaviour (flag) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_3_tot` | Total score for Section 3 — Accommodation | `0 - 8` |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs309` | Tenancy or rental issues | `NA = Not Applicable` / `NO` / `YES` |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs33` | Accommodation status on reception | Category codes incl. permanent/temporary/NFA (see catalogue) |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs37` | Accommodation before prison suitability | `N/A` / `NO` / `YES` |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs38` | Claiming housing benefit | `DK` / `NO` / `YES` |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs43` | Accommodation needs / issues (flag) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_rmp` | `question_rmp_28_0_3_1` | Accommodation taken into account (description begins “taken into account acco…”) | `YES` |
+
+### How to find more housing variables
+In `data_dictionary`:
+- Filter **Table Name = `oasys_assessments_details_core_risk`** and search **Variable Name contains `question_3_`**
+- Search **Variable Description** for: `accommodation`, `no fixed abode`, `tenancy`, `rental`, `housing benefit`, `NFA`, `homeless`
+
+---
+
+## 6) Low income (and debt)
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_core_risk`** — Financial management & income (**Section 5**) is captured as `question_5_*`
+- **`oasys_assessments_details_bcs`** — custody screening flags for income/benefits/bank account/finance problems
+- **`oasys_assessments_details_saq`** — self-assessment items including debt-related prompts
+- **`oasys_assessments_details_skillschecker`** — confidence with money management
+- **`oasys_assessments_details_tr_bcs`** — limited finance flags (e.g., housing benefit; “gets money every week”)
+
+### Confirmed variables in the catalogue (income/finance)
+| Table | Variable | What it captures (from the metadata description) | Values (optional) |
+|---|---|---|---|
+| `oasys_assessments_details_bcs` | `question_bcs45` | Offender has an income | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs46` | Offender has a pension | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs47` | Offender has any private income | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs48` | Partner has an income | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs49` | Financial family support | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs52` | Receives income support | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs53` | Other finance in receipt of | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs55` | Has a bank account | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs56` | Finance is a problem issue | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_5_1` | Main source of income before custody | Coded list incl. wages/benefits/loans/no income (see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_5_2` | Problems with financial situation | `0/1/2` scale (+ `M`) |
+| `oasys_assessments_details_core_risk` | `question_5_3` | Financial management problems | `0/1/2` scale (+ `M`) |
+| `oasys_assessments_details_core_risk` | `question_5_4` | Problems with illegal earning as income source | `0/1/2` scale (+ `M`) |
+| `oasys_assessments_details_core_risk` | `question_5_5` | Over-reliance on others for financial support | `0/1/2` scale (+ `M`) |
+| `oasys_assessments_details_core_risk` | `question_5_98` | Financial issues linked to RoSH/risks/needs | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_5_99` | Financial issues linked to offending behaviour | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_5_tot` | Total score for Section 5 — Financial Management & Income | `0 - 9` |
+| `oasys_assessments_details_core_risk` | `question_2_9_financial` | Financial motivator for offending (flag) | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_9_v2_financial` | v2 financial motivator (flag) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_saq` | `question_saqc20_1` | Debt-related SAQ problem flag (description begins “Indicates if the following is a problem for th…”) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_saq` | `question_saqc20_2` | Debt-related SAQ linked-to-offending flag (description begins “Indicates if this problem is linked to the off…”) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_skillschecker` | `question_sc8` | Confidence handling money (description begins “feels confident in h…”) | Ordered categories (see catalogue) |
+| `oasys_assessments_details_tr_bcs` | `question_tr_bcs45` | Gets money every week | `NO = No` / `YES = Yes` |
+
+### How to find more low-income/debt variables
+In `data_dictionary`:
+- Filter **Table Name = `oasys_assessments_details_core_risk`** and search **Variable Name contains `question_5_`**
+- Search **Variable Description** for: `income`, `benefit`, `bank`, `money`, `finance`, `loan`, `debt`
+
+---
+
+## 7) Substance misuse
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_core_risk`** — Drugs misuse section (**Section 8**) is captured as `question_8_*` (incl. drug-specific frequency/current/previous use)
+- **`oasys_assessments_details_bcs`** — screening flags for alcohol/drug problems, injecting history, main drug, maintenance programme
+- **`oasys_assessments_details_tr_bcs`** — additional screening flags (where present)
+- **Lookup sheet:** **`drug_lookup`** tab in the same ODS (maps drug codes used in some questions)
+
+### Confirmed variables in the catalogue (substance misuse)
+| Table | Variable | What it captures (from the metadata description) | Values (optional) |
+|---|---|---|---|
+| `oasys_assessments_details_bcs` | `question_bcs81` | Current substance/drug problem (description begins “current proble…”) | `0/1/2` scale (No/Some/Significant problems + `M`) |
+| `oasys_assessments_details_bcs` | `question_bcs82` | Alcohol is a problem area | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs84` | Ever misused drugs (description begins “ever mi…”) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs86` | Ever injected drugs (description begins “ever in…”) | `0 = Never / 1 = Previously / 2 = Current / M = Missing` |
+| `oasys_assessments_details_bcs` | `question_bcs87` | Main drug used (coded) | Code list (see catalogue; uses drug codes) |
+| `oasys_assessments_details_bcs` | `question_bcs88` | Drug-related concern flag (description begins “ever had any con…”) | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_bcs` | `question_bcs90` | On drug maintenance programme | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_8_1` | Ever misused drugs | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_8_2_*` | Drug-specific questions (Heroin/Methadone/Opiates/Crack/Cannabis/Ecstasy/Spice/etc.) | Frequency + current/previous use flags (see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_2_10_alcho` | Alcohol acted as a disinhibitor at offence | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_10_drugs` | Drugs acted as a disinhibitor at offence | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_9_addiction` | Addiction/perceived needs motivator | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_9_v2_addiction` | v2 addiction/perceived needs motivator | `NO = No` / `YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_13_3_9_1` / `question_13_3_9_2` / `question_13_3_9_3` | Alcohol misuse affects risk/needs (grouped flags) | `YES` |
+| `oasys_assessments_details_core_risk` | `question_13_3_10_1` / `question_13_3_10_2` / `question_13_3_10_3` | Drugs misuse affects risk/needs (grouped flags) | `YES` |
+| *(ODS lookup)* | *(sheet)* `drug_lookup` | Drug code → drug name mapping used by coded questions (e.g. main drug used) | Lookup table |
+
+### How to find more substance misuse variables
+In `data_dictionary`:
+- Filter **Table Name = `oasys_assessments_details_core_risk`** and search **Variable Name contains `question_8_`**
+- Search **Variable Description** for: `drug`, `alcohol`, `inject`, `misuse`, `addiction`, `maintenance`, `treatment`
+
+---
+
+## 8) Offending
+
+### Primary OASys tables to use
+- **`oasys_assessments_details_core_risk`** — Offending history and offending behaviour sections are captured as `question_1_*` and `question_2_*`
+- **`oasys_assessments_details_bcs`** — custody screening includes conviction timing and related offence history indicators (e.g., age at first conviction, court appearances)
+- **`oasys_assessments_metadata`** — assessment-level metadata (useful for time-stamping, sentence/assessment context)
+
+### Confirmed variables in the catalogue (offending history/behaviour examples)
+| Table | Variable | What it captures (from the metadata description) | Values (optional) |
+|---|---|---|---|
+| `oasys_assessments_details_bcs` | `question_bcs24` | Number of court appearances at which convicted (description begins “Number of court appearances…”) | `0 - 99` |
+| `oasys_assessments_details_bcs` | `question_bcs25` | Number of court appearances at which convicted (description begins “Number of court appearances…”) | `0 - 99` |
+| `oasys_assessments_details_bcs` | `question_bcs28` | Age at first conviction | `0 - 99` |
+| `oasys_assessments_details_core_risk` | `question_1_10` | Number of previous custodial sentences | `0 - 9` |
+| `oasys_assessments_details_core_risk` | `question_1_10_1` | Weighted score for previous custodial sentences | `0/1/2` (see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_1_11` | Breaches indicator | `0 = No / 2 = Yes` |
+| `oasys_assessments_details_core_risk` | `question_1_12` | Number of categories of offences/convictions | `0 - 9` |
+| `oasys_assessments_details_core_risk` | `question_1_12_1` | Weighted score for categories of offences/convictions | (see catalogue) |
+| `oasys_assessments_details_core_risk` | `question_1_29` | Date of current conviction | `YYYY-MM-DD` |
+| `oasys_assessments_details_core_risk` | `question_2_11` | Accepts responsibility (description begins “accepts respons…”) | `NO = No / YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_2_13` | Escalation flag (description begins “escal…”) | `NO = No / YES = Yes` |
+| `oasys_assessments_details_core_risk` | `question_2_14` | Pattern flag (description begins “part o…”) | `NO = No / YES = Yes` (plus missing codes where present) |
+| `oasys_assessments_details_core_risk` | `question_2_2_weapon` | Offence involved a weapon | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_3_physicalviol` | Offence involved physical violence | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_3_directcont` | Offence involved direct victim contact | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_3_repeatvict` | Repeat victimisation indicator | `YES` |
+| `oasys_assessments_details_core_risk` | `question_2_3_resptovictim` | Response to victim indicator | `YES` |
+
+### How to find more offending variables
+In `data_dictionary`:
+- Filter **Table Name = `oasys_assessments_details_core_risk`**
+- Search **Variable Name contains `question_1_`** (offending history) and `question_2_` (offending behaviour)
+- Search **Variable Description** for: `offence`, `offending`, `conviction`, `breach`, `custodial`, `sanction`, `weapon`, `violence`, `victim`, `escalation`, `pattern`
+
+---
