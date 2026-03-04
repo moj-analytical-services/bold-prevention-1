@@ -466,7 +466,7 @@ Also search **Variable Description** for:
 
 ---
 
-## Quick way to extract the full lists yourself (copy/paste)
+## Quick way to extract the full lists
 
 ```python
 import pandas as pd
@@ -510,7 +510,7 @@ print(family.head(20))
 print(education.head(20))
 print(physical.head(20))
 print(mental.head(20))
-
+```
 
 ## Additional OASys metadata: variables and tables for outcomes 5–8
 
